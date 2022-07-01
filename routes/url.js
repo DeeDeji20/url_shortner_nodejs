@@ -1,5 +1,7 @@
 const express = require("express")
 const router = express.Router()
+
+
 const validUrl = require('valid-url')
 const shortid = require('shortid')
 const config = require('config')
@@ -19,7 +21,7 @@ router.post('/shorten', async (req, res) =>{
     }
 
     // create url code
-    const urlCode = shortid = shortid.generate();
+    const urlCode = shortid.generate();
 
     // check long url
     if(validUrl.isUri(longUrl)){
@@ -31,12 +33,14 @@ router.post('/shorten', async (req, res) =>{
             }else{
                 const shortUrl = baseUrl + '/' + urlCode;
 
-                url =new Url({
+                url = new Url({
                     longUrl,
-                    shortUrl, urlCode, date: new Date()
+                    shortUrl, 
+                    urlCode, 
+                    date: new Date()
                 });
 
-                await Url.save();
+                await url.save();
                 res.json(url)
             }
         } catch (err) {

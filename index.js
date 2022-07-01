@@ -5,7 +5,7 @@ const app = express()
 //connects to DB
 connectDB()
 
-app.use(express.json())
+app.use(express.json({extended: false}))
 
 //Define route
 app.use('/', require('./routes/index'));
